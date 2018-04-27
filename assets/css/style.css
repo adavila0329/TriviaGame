@@ -1,0 +1,22 @@
+
+#box{
+    margin: auto;
+    background-color: bisque;
+    text-align: center;
+    width: 600px; 
+    height: 600px;
+    padding: 10px;
+    /* border: 1px solid red; */
+} 
+
+h1 {
+    font-size: 50px;
+    color: blue
+}
+
+#start {
+    font-size: 40px;
+    height: 70px;
+    width: 200px;
+    background-color: palevioletred;
+}
