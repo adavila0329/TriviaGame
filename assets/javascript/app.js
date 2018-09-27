@@ -1,108 +1,196 @@
-var myQuestions = [
-  "Method prompt() contains.....number of parameters?",
-  "If button is clicked..... event handler is invocked?",
-  "GetMonth() returns the months as?",
-  "Event is used to check an empty text box?",
-  "JavaScript file has an extension of?",
-  "A function associated with an object is called?",
-  "Inside which HTML element do we put the Javascript?",
-  "Which of the dialog box display a messagea and a data entry field?",
-  "Function is used to Parse a string to Int?",
-  "IsNan() evalutes and argument to determine if given value?"
-];
+var panel = $("#quizArea");
 
-var myAnsweres = [
-  ["One", "Two", 'Three', "Zero"], 
-  ["OnSubmit()", "OnLoad()", "IsPostBack()", "OnClick()"],
-  ["Int, Float, Char, String"],
-  ["OnClick(), OnFocus(), Onblur(), None"],
-  [".Java, .Js, .javascript, xml"],
-  ["Function, Method, Link, None"],
-  ["Js, Javascript, Script, Scripting"],
-  ["Alert, Prompt, Confirm, Msg"],
-  ["Interger.Parse, Int.Parse, Parse.Int, None"],
-  ["Is Not a Null, Is Not a Number, Is Not a New Object, None Of The Above"]
-];
+// questions
+var questions = [{
+    question: "Method prompt() contains.....number of parameters?",
+    answers: ["One", "Two", "Three", "Zero"],
+    correctAnswers: "Two"
+  },{
+    question: "If button is clicked..... event handler is invocked?",
+    answers: ["OnSubmit()", "OnLoad()", "IsPostBack()", "OnClick()"],
+    correctAnswers: "OnClick()"
+  },{
+    question: "GetMonth() returns the months as?",
+    answers: ["Int", "Float", "Char", "String"],
+    correctAnswers: "Int"
+  },{
+    question: "Event is used to check an empty text box?",
+    answers: ["OnClick()", "OnFocus()", "Onblur()", "None"],
+    correctAnswers: "OnBlur()"
+  },{
+    question: "JavaScript file has an extension of?",
+    answers: [".Java", ".Js", ".javascript", "xml"],
+    correctAnswers: ".Js"
+  },{
+    question: "A function associated with an object is called?",
+    answers: ["Function", "Method", "Link", "None"],
+    correctAnswers: "Method"
+  },{
+    question: "Inside which HTML element do we put the Javascript?",
+    answers: ["Js", "Javascript", "Script", "Scripting"],
+    correctAnswers: "JavaScript"
+  },{
+    question:"Which of the dialog box display a messagea and a data entry field?",
+    answers: ["Alert", "Prompt", "Confirm", "Msg"],
+    correctAnswers: "Prompt()"
+  },{
+    question: "Function is used to Parse a string to Int?",
+    answers: ["Interger.Parse", "Int.Parse", "Parse.Int", "None"],
+    correctAnswers: "Int.Parse"
+  },{
+    question: "IsNan() evalutes and argument to determine if given value?",
+    answers: ["Is Not a Null", "Is Not a Number", "Is Not a New Object","None Of The Above"],
+    correctAnswers: "is Not a Null"
+  }];
 
-var correctAnswers = [
-  "Two",
-  "OnClick()",
-  "Int",
-  "OnBlur()",
-  ".Js",
-  "Method",
-  "JavaScript",
-  "Prompt()",
-  "Int.Parse",
-  "is Not a"
-];
+var timer;
 
-var number = 60;
-var correctTotal = 0;
-var inCorrectAnswers = 0;
-var unAnsweredQuestions = myQuestions.length;
+var game = {
+  correct: 0,
+  incorrect: 0,
+  counter: 120,
+  countdown: function() {
+    game.counter--;
+    $("#counter").html(game.counter);
+    if (game.counter <= 0) {
+      console.log("Time is up!");
+      game.done();
+    }
+  },
+    start: function() {
+    timer = setInterval(game.countdown, 1000);
 
-//  Variable that will hold our interval ID when we execute
-//  the "run" function
-var intervalId;
-$("#start").on("click", start);
-//  When the stop button gets clicked, run the stop function.
-$("#stop").on("click", stop);
+    $("#subWrapper").prepend("<h2>Time Remaining: <span id='counter'>120</span> Seconds</h2>");
 
-//  When the resume button gets clicked, execute the run function.
-// $("#resume").on("click", run);
-function start() {
-    $("#start").hide();
-    run();
-    getQuestions();
-    $("#stop").append($('<input id="stop" type="button" class="w3-btn w3-round-xlarge" value="STOP">'));
-}
+    $("#start").remove();
 
-//  The run function sets an interval
-//  that runs the decrement function once a second.
-//  *****BUG FIX******** 
-//  Clearing the intervalId prior to setting our new intervalId will not allow multiple instances.
+    for (var i = 0; i < questions.length; i++) {
+      panel.append("<h2>" + questions[i].question + "</h2>");
+      for (var j = 0; j < questions[i].answers.length; j++) {
+        panel.append("<input type='radio' name='question-" + i + "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
+      }
+    }
 
-function run() {
-//   clearInterval(intervalId);
-  intervalId = setInterval(decrement, 1000);
-}
-function getQuestions() {
-    for(var i = 0; i < myQuestions.length; i++){
-    console.log(myQuestions + myAnsweres[i])
-    };
-}
+    panel.append("<button id='done'>Done</button>");
+  },
 
+  done: function() {
 
-//  The decrement function.
-function decrement() {
-  //  Decrease number by one.
-  number--;
-  //  Show the number in the #show-number tag.
-  $("#show-number").html("<h2>" + number + "</h2>");
-  //  Once number hits zero...
-  if (number === 0) {
-    //  ...run the stop function.
-    stop();
-    //  Alert the user that time is up.
-    alert("Time Up!");
+    $.each($("input[name='question-0']:checked"), function() {
+      if ($(this).val() === questions[0].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-1']:checked"), function() {
+      if ($(this).val() === questions[1].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-2']:checked"), function() {
+      if ($(this).val() === questions[2].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-3']:checked"), function() {
+      if ($(this).val() === questions[3].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-4']:checked"), function() {
+      if ($(this).val() === questions[4].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-5']:checked"), function() {
+      if ($(this).val() === questions[5].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-6']:checked"), function() {
+      if ($(this).val() === questions[6].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-7']:checked"), function() {
+      if ($(this).val() === questions[7].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-8']:checked"), function() {
+      if ($(this).val() === questions[8].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    $.each($("input[name='question-9']:checked"), function() {
+      if ($(this).val() === questions[9].correctAnswer) {
+        game.correct++;
+      }
+      else {
+        game.incorrect++;
+      }
+    });
+
+    this.result();
+
+  },
+
+  result: function() {
+
+    clearInterval(timer);
+
+    $("#sub-wrapper h2").remove();
+
+    panel.html("<h2>All Done!</h2>");
+    panel.append("<h3>Correct Answers: " + this.correct + "</h3>");
+    panel.append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
+    panel.append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
   }
-}
 
-//  The stop function
-function stop() {
-  //  Clears our intervalId
-  //  We just pass the name of the interval
-  //  to the clearInterval function.
-  clearInterval(intervalId);
-  $("#stop").hide();
-  $("#show-number").hide();
-  $("#questions").html("<br><h2>Times Up!</h2>");
-  $("#message").html("Correct Answers: " + correctTotal + "<br>");
-  $("#message").append("<br>Incorrect Answers: " + inCorrectAnswers + "<br>");
-  $("#message").append("<br>unAnsweredQuestions: " + unAnsweredQuestions + "<br>")
+};
 
-}
+// Click events
 
-//  Execute the run function.
-run();
+$(document).on("click", "#start", function() {
+  game.start();
+});
+
+
+$(document).on("click", "#done", function() {
+  game.done();
+});
