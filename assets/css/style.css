@@ -8,13 +8,18 @@ body {
   background-image: url("../images/1_OF0xEMkWBv-69zvmNs6RDQ.gif");
 }
 
+#title {
+    background: pink;
+    border: 2px solid blue;
+}
+
 #wrapper {
   width: 960px;
   min-height: 80%;
   box-sizing: border-box;
   padding: 5% 0;
   margin: 5% auto;
-  background-color: #fff17a;
+  background-color: transparent;
 }
 
 #subWrapper {
@@ -38,7 +43,7 @@ h1 {
   font-family: Geo, sans-serif;
   font-size: 6.5em;
   font-weight: bold;
-  color: blue;
+  color: black;
 }
 
 h2 {

@@ -65,6 +65,7 @@ var game = {
     $("#subWrapper").prepend("<h2>Time Remaining: <span id='counter'>120</span> Seconds</h2>");
 
     $("#start").remove();
+    $("#subWrapper").css("background-color", "#fff17a");
 
     for (var i = 0; i < questions.length; i++) {
       panel.append("<h2>" + questions[i].question + "</h2>");
