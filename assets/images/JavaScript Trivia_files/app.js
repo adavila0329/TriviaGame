@@ -48,7 +48,7 @@ var timer;
 var game = {
   correct: 0,
   incorrect: 0,
-  counter: 2,
+  counter: 120,
 
   countdown: function() {
     game.counter--;
@@ -180,9 +180,9 @@ var game = {
     $("#sub-wrapper h2").remove();
 
     panel.html("<h2>All Done!</h2>");
-    panel.append("<h3 style='color: green;'>Correct Answers: " + this.correct + "</h3>");
-    panel.append("<h3 style='color: red;'>Incorrect Answers: " + this.incorrect + "</h3>");
-    panel.append("<h3 style='color: orange;'>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
+    panel.append("<h3>Correct Answers: " + this.correct + "</h3>");
+    panel.append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
+    panel.append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
   }
 
 };
