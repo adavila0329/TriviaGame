@@ -2,11 +2,11 @@ var panel = $("#quizArea");
 
 // questions
 var questions = [{
-    question: "Method prompt() contains.....number of parameters?",
+    question: "Method prompt() contains ______ number of parameters?",
     answers: ["One", "Two", "Three", "Zero"],
     correctAnswers: "Two"
   },{
-    question: "If button is clicked..... event handler is invocked?",
+    question: "If button is clicked _______ event handler is invocked?",
     answers: ["OnSubmit()", "OnLoad()", "IsPostBack()", "OnClick()"],
     correctAnswers: "OnClick()"
   },{
