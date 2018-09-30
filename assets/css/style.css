@@ -9,7 +9,7 @@ body {
 }
 
 #title {
-    background: pink; 
+    background: #fff17a; 
     border: 2px solid blue;
 }
 
@@ -57,7 +57,7 @@ h3 {
 
 #start {
   margin-top: 10%;
-  background: pink;
+  background: #fff17a;
   border: 2px solid blue;
 }
 
@@ -66,6 +66,6 @@ h3 {
 }
 
 button:hover {
-  background: pink;
+  background: green;
   border: 2px solid blue;
 }

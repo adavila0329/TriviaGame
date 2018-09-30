@@ -66,6 +66,7 @@ var game = {
 
     $("#start").remove();
     $("#subWrapper").css("background-color", "#fff17a");
+    $("#subWrapper").css("border", "2px solid blue");
 
     for (var i = 0; i < questions.length; i++) {
       panel.append("<h2>" + questions[i].question + "</h2>");
